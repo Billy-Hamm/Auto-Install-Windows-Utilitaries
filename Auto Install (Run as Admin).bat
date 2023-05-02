@@ -5,9 +5,9 @@ reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" 
 if %OS%==64BIT (
 :: /S, -ms are for silently installation (default locations and parameters)
 ::checks if the file exists
-if exist "%~dp0\Adobe Reader v9.10\AdbeRdr910 en Std.exe" (
+if exist "%~dp0\<path to adobe reader.exe>" (
 	echo "Adobe en cours d'execution"
-	start "Adobe" "%~dp0\Adobe Reader v9.10\AdbeRdr910 en Std.exe" /sAll /rs /msi EULA_ACCEPT=YES
+	start "Adobe" "%~dp0\<path to adobe reader.exe>" /sAll /rs /msi EULA_ACCEPT=YES
 ) ELSE (
 	echo "Adobe x64 Introuvable"
 	pause
@@ -59,9 +59,9 @@ endlocal
 if %OS%==32BIT (
 
 @echo off
-if exist "%~dp0\Adobe Reader v9.10\AdbeRdr910 en Std.exe" (
+if exist "%~dp0\<path to adobe reader.exe>" (
 	echo "Adobe en cours d'execution"
-	start "Adobe" "%~dp0\Adobe Reader v9.10\AdbeRdr910 en Std.exe" /sAll /rs /msi EULA_ACCEPT=YES
+	start "Adobe" "%~dp0\<path to adobe reader.exe>" /sAll /rs /msi EULA_ACCEPT=YES
 ) ELSE (
 	echo "Adobe x86 Introuvable"
 	pause
