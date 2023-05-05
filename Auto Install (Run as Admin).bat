@@ -5,7 +5,7 @@ reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" 
 if %OS%==64BIT (
 :: /S, -ms are for silently installation (default locations and parameters)
 ::checks if the file exists
-if exist "%~dp0\Adobe Reader v9.10\AdbeRdr910 en Std.exe" (
+if exist "%~dp0\Adobe Reader Path.exe" (
 	echo "Adobe en cours d'execution"
 	start "Adobe" "%~dp0\Adobe Reader v9.10\AdbeRdr910 en Std.exe" /sAll /rs /msi EULA_ACCEPT=YES
 ) ELSE (
@@ -39,27 +39,20 @@ if exist "%~dp0\vlc-2.2.6-win32.exe" (
 )
 
 @echo off
-::checks if it's Win 7, if Yes it runs chrome V107 ( latest version suported on Win7) Else it runs the latest version of Chrome
+::checks if it's Win 7, 8 or 8.1 if Yes it runs chrome V107 ( latest version suported on Win7) Else it runs the latest version of Chrome
 setlocal
-if "%version%" == "6.1" (
-	if exist "%~dp0\ChromeStandaloneV107x64.exe" (
-		echo "Chrome V 107 en cours d'execution"
-		start "Chrome" "%~dp0\ChromeStandaloneV107x64.exe" 
-		) ELSE ( echo "Chrome V 107 64 introuvable"
-			 pause )
-) ELSE (
-	if exist "%~dp0\ChromeStandaloneSetup x64.exe" (
-		echo "Chrome en cours d'execution"
-		start "Chrome" "%~dp0\ChromeStandaloneSetup x64.exe" 
-		) ELSE ( echo "Chrome 64 introuvable"
-			 pause ) )
+
+if "%version%" == "6.1" ( goto runChrome107x64 )
+if "%version%" == "6.2" ( goto runChrome107x64 )
+if "%version%" == "6.3" ( goto runChrome107x64 ) ELSE ( goto runChromeLatestx64 )
+
 endlocal
 )
 
 if %OS%==32BIT (
 
 @echo off
-if exist "%~dp0\Adobe Reader v9.10\AdbeRdr910 en Std.exe" (
+if exist "%~dp0\Adobe Reader path.exe" (
 	echo "Adobe en cours d'execution"
 	start "Adobe" "%~dp0\Adobe Reader v9.10\AdbeRdr910 en Std.exe" /sAll /rs /msi EULA_ACCEPT=YES
 ) ELSE (
@@ -78,19 +71,9 @@ if exist "%~dp0\Firefox Setup 107.0 x86.exe" (
 
 @echo off
 setlocal
-if "%version%" == "6.1" (
-:: 6.1 stands for Windows 7
-	if exist "%~dp0\ChromeStandaloneV107x86.exe" (
-		echo "Chrome V 107 en cours d'execution"
-		start "Chrome" "%~dp0\ChromeStandaloneV107x86.exe" 
-		) ELSE ( echo "Chrome V 107 86 introuvable"
-			 pause )
-) ELSE (
-	if exist "%~dp0\ChromeStandaloneSetup x86.exe" (
-		echo "Chrome en cours d'execution"
-		start "Chrome" "%~dp0\ChromeStandaloneSetup x86.exe" 
-		) ELSE ( echo "Chrome 86 introuvable"
-			 pause ) )
+if "%version%" == "6.1" ( goto runChrome107x86 )
+if "%version%" == "6.2" ( goto runChrome107x86 )
+if "%version%" == "6.3" ( goto runChrome107x86 ) ELSE ( goto runChromeLatestx86 )
 endlocal
 
 @echo off
@@ -111,3 +94,35 @@ if exist "%~dp0\vlc-2.2.6-win32.exe" (
 	pause
 )
 )
+
+:runChrome107x64
+if exist "%~dp0\ChromeStandaloneV107x64.exe" (
+	echo "Chrome V 107 en cours d'execution"
+	start "Chrome" "%~dp0\ChromeStandaloneV107x64.exe" 
+	) ELSE ( echo "Chrome V 107 x64 introuvable"
+		pause )
+exit
+
+:runChromeLatestx64
+if exist "%~dp0\ChromeStandaloneSetup x64.exe" (
+	echo "Chrome en cours d'execution"
+	start "Chrome" "%~dp0\ChromeStandaloneSetup x64.exe" 
+	) ELSE ( echo "Chrome x64 introuvable"
+	pause )
+exit
+
+:runChrome107x86
+if exist "%~dp0\ChromeStandaloneV107x86.exe" (
+	echo "Chrome V 107 en cours d'execution"
+	start "Chrome" "%~dp0\ChromeStandaloneV107x86.exe"
+	) ELSE ( echo "Chrome V 107 x86 introuvable"
+	pause )
+exit
+
+:runChromeLatestx86
+if exist "%~dp0\ChromeStandaloneSetup x86.exe" (
+	echo "Chrome en cours d'execution"
+	start "Chrome" "%~dp0\ChromeStandaloneSetup x86.exe" 
+	) ELSE ( echo "Chrome x86 introuvable"
+	pause )
+exit
