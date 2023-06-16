@@ -5,9 +5,9 @@ reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" 
 if %OS%==64BIT (
 :: /S, -ms are for silently installation (default locations and parameters)
 ::checks if the file exists
-if exist "%~dp0\<path to adobe reader.exe>" (
+if exist "%~dp0\AcroRdrDC2300120174_fr_FR.exe" (
 	echo "Adobe en cours d'execution"
-	start "Adobe" "%~dp0\<path to adobe reader.exe>" /sAll /rs /msi EULA_ACCEPT=YES
+	start "Adobe" "%~dp0\AcroRdrDC2300120174_fr_FR.exe" --silent --INSTALLLANGUAGE=fr_FR
 ) ELSE (
 	echo "Adobe x64 Introuvable"
 	pause
@@ -42,19 +42,24 @@ if exist "%~dp0\vlc-2.2.6-win32.exe" (
 ::checks if it's Win 7, 8 or 8.1 if Yes it runs chrome V107 ( latest version suported on Win7) Else it runs the latest version of Chrome
 setlocal
 
+for /f "tokens=4-5 delims=. " %%i in ('ver') do set VERSION=%%i.%%j
+
 if "%version%" == "6.1" ( goto runChrome107x64 )
 if "%version%" == "6.2" ( goto runChrome107x64 )
 if "%version%" == "6.3" ( goto runChrome107x64 ) ELSE ( goto runChromeLatestx64 )
 
+rem etc etc
+
 endlocal
+
 )
 
 if %OS%==32BIT (
 
 @echo off
-if exist "%~dp0\<path to adobe reader.exe>" (
+if exist "%~dp0\AcroRdrDC2300120174_fr_FR.exe" (
 	echo "Adobe en cours d'execution"
-	start "Adobe" "%~dp0\<path to adobe reader.exe>" /sAll /rs /msi EULA_ACCEPT=YES
+	start "Adobe" "%~dp0\AcroRdrDC2300120174_fr_FR.exe" --silent --INSTALLLANGUAGE=fr_FR
 ) ELSE (
 	echo "Adobe x86 Introuvable"
 	pause
@@ -68,13 +73,6 @@ if exist "%~dp0\Firefox Setup 107.0 x86.exe" (
 	echo "Firefox x86 Introuvable"
 	pause
 )
-
-@echo off
-setlocal
-if "%version%" == "6.1" ( goto runChrome107x86 )
-if "%version%" == "6.2" ( goto runChrome107x86 )
-if "%version%" == "6.3" ( goto runChrome107x86 ) ELSE ( goto runChromeLatestx86 )
-endlocal
 
 @echo off
 if exist "%~dp0\winrar-x64-611fr.exe" (
@@ -93,6 +91,20 @@ if exist "%~dp0\vlc-2.2.6-win32.exe" (
 	echo "Vlc x86 Introuvable"
 	pause
 )
+
+@echo off
+setlocal
+
+for /f "tokens=4-5 delims=. " %%i in ('ver') do set VERSION=%%i.%%j
+
+if "%version%" == "6.1" ( goto runChrome107x86 )
+if "%version%" == "6.2" ( goto runChrome107x86 )
+if "%version%" == "6.3" ( goto runChrome107x86 ) ELSE ( goto runChromeLatestx86 )
+
+rem etc etc
+
+endlocal
+
 )
 
 :runChrome107x64
