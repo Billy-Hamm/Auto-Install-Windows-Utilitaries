@@ -48,8 +48,6 @@ if "%version%" == "6.1" ( goto runChrome107x64 )
 if "%version%" == "6.2" ( goto runChrome107x64 )
 if "%version%" == "6.3" ( goto runChrome107x64 ) ELSE ( goto runChromeLatestx64 )
 
-rem etc etc
-
 endlocal
 
 )
@@ -100,8 +98,6 @@ for /f "tokens=4-5 delims=. " %%i in ('ver') do set VERSION=%%i.%%j
 if "%version%" == "6.1" ( goto runChrome107x86 )
 if "%version%" == "6.2" ( goto runChrome107x86 )
 if "%version%" == "6.3" ( goto runChrome107x86 ) ELSE ( goto runChromeLatestx86 )
-
-rem etc etc
 
 endlocal
 
